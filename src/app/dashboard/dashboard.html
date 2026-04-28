@@ -1,0 +1,530 @@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+<div class="app">
+  <div class="sidebar">
+    <div class="sidebar-logo">
+      <i class="fa-solid fa-sliders"></i>
+      <h5>Stock Manager</h5>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-label">Inventory</div>
+      <div class="nav-item" [class.active]="activeSection === 'table'" (click)="showTab('table')">
+        <svg class="nav-icon" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M2 3h12v2H2V3zm0 4h12v2H2V7zm0 4h8v2H2v-2z" />
+        </svg>
+        Opening stock
+      </div>
+      <div class="nav-item" [class.active]="activeSection === 'serial'">
+        <svg class="nav-icon" viewBox="0 0 16 16" fill="currentColor">
+          <path
+            d="M3 2h10a1 1 0 011 1v10a1 1 0 01-1 1H3a1 1 0 01-1-1V3a1 1 0 011-1zm1 2v8h8V4H4zm1 1h2v2H5V5zm4 0h2v2H9V5zm-4 4h2v2H5V9zm4 0h2v2H9V9z" />
+        </svg>
+        Serial numbers
+      </div>
+      <div class="nav-item">
+        <svg class="nav-icon" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M8 1L1 5v6l7 4 7-4V5L8 1zm0 2l5 2.8V10L8 12.8 3 10V5.8L8 3z" />
+        </svg>
+        Stock exchange
+      </div>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-label">General</div>
+      <div class="nav-item">
+        <svg class="nav-icon" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M8 1a3 3 0 100 6A3 3 0 008 1zM2 13c0-2.8 2.7-5 6-5s6 2.2 6 5H2z" />
+        </svg>
+        Community
+      </div>
+      <div class="nav-item">
+        <svg class="nav-icon" viewBox="0 0 16 16" fill="currentColor">
+          <path
+            d="M8 1a1 1 0 011 1v1.05A5 5 0 0113 8h1a1 1 0 010 2h-1a5 5 0 01-4 4.95V16a1 1 0 01-2 0v-1.05A5 5 0 013 10H2a1 1 0 010-2h1a5 5 0 014-4.95V2a1 1 0 011-1zm0 4a3 3 0 100 6A3 3 0 008 5z" />
+        </svg>
+        Settings
+      </div>
+    </div>
+  </div>
+
+
+  <div class="main">
+    <div class="topbar">
+      <div>
+        <div class="topbar-title fw-bold">
+          {{ activeSection === 'table' ? 'Opening stock list' :
+          activeSection === 'form' ? (mode === 'add' ? 'Add opening stock' : 'Edit opening stock') :
+          activeSection === 'serial' ? 'Serial numbers' : 'Opening stock list' }}
+        </div>
+        <!-- <div class="topbar-sub">Manage inventory, serial numbers and product details</div> -->
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button class="btn btn-sm" (click)="showTab('table')">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M1 2h14v3H1V2zm0 5h14v2H1V7zm0 4h14v3H1v-3z" />
+          </svg>
+          List view
+        </button>
+        <button class="btn btn-primary btn-sm" (click)="openAdd()">
+          <i class="fa-solid fa-plus"></i>
+          Add stock
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="activeSection === 'table'" class="content">
+
+      <div class="card" style="margin-bottom:12px;padding:5px 16px">
+        <div class="filter-grid">
+
+          <div class="form-group">
+            <label class="form-label">Bill No.</label>
+            <input class="form-control" [(ngModel)]="filterBillNo" (ngModelChange)="filterList()"
+              placeholder="Bill No. ..." />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Product Name</label>
+            <input class="form-control" [(ngModel)]="searchQuery" (ngModelChange)="filterList()"
+              placeholder="Product Name ..." />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Supplier</label>
+            <input class="form-control" [(ngModel)]="filterSupplierQuery" (ngModelChange)="filterList()"
+              placeholder="Supplier ..." />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Location</label>
+            <input class="form-control" [(ngModel)]="filterLocationQuery" (ngModelChange)="filterList()"
+              placeholder="Location ..." />
+          </div>
+
+          <button class="btn btn-primary btn-sm" style="align-self:flex-end" (click)="filterList()">
+            <i class="fa fa-search"></i> Search
+          </button>
+
+          <button class="btn btn-sm" style="align-self:flex-end" (click)="resetFilters()">
+            ↺ Reset
+          </button>
+
+        </div>
+      </div>
+
+      <div class="card">
+        <!-- <div class="card-header">
+          <div class="card-header-left">
+            <div class="card-title">Inventory Overview</div>
+            <span class="count-badge">{{ totalRecords }} records</span>
+          </div>
+        </div> -->
+
+        <table>
+          <thead>
+            <tr style="background-color: #4F46E5;">
+              <th style="color: aliceblue;">#<br><small style="color: aliceblue;">Date</small></th>
+              <th style="color: aliceblue;">Bill No.<br><small style="color: aliceblue;">Bill DT (QTY)</small></th>
+              <th style="color: aliceblue;">Supplier<br><small style="color: aliceblue;">Company</small></th>
+              <th style="color: aliceblue;">Product<br><small style="color: aliceblue;">Model No.</small></th>
+              <th style="color: aliceblue;">Category<br><small style="color: aliceblue;">Type</small></th>
+              <th style="color: aliceblue;">Location<br><small style="color: aliceblue;">Sub Location</small></th>
+              <th style="color: aliceblue;">MRP<br><small style="color: aliceblue;">Purchased Rate</small></th>
+              <th style="color: aliceblue;">QTY<br><small style="color: aliceblue;">MFG DT</small></th>
+              <th style="color: aliceblue;">Net Amt.</th>
+              <th style="color: aliceblue;">Open Stock<br><small style="color: aliceblue;">Stock Value</small></th>
+              <th style="color: aliceblue;">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of paginatedList; let i = index">
+              <td class="text-secondary">{{ currentPage * rowsPerPage + i + 1 }}<br>
+                <small class="text-secondary">{{ item.purchase_date | date:'dd-MM-yyyy' }}</small>
+              </td>
+              <td class="text-secondary">{{ item.purchase_ref_no || '—' }}<br>
+                <small class="text-secondary">{{ item.purchase_date | date:'dd-MM-yy' }} ({{ item.qty }})</small>
+              </td>
+              <td class="text-secondary">{{ item.supplier || '—' }}<br>
+                <small class="text-secondary">{{ item.company || '—' }}</small>
+              </td>
+              <td class="text-secondary">{{ item.product_name || '—' }}<br>
+                <small class="text-secondary">{{ item.model_no || '—' }}</small>
+              </td>
+              <td class="text-secondary">{{ item.product_category || '—' }}<br>
+                <small class="text-secondary">{{ item.product_type || '—' }}</small>
+              </td>
+              <td class="text-secondary">{{ item.location || '—' }}<br>
+                <small class="text-secondary">{{ item.sub_location || '—' }}</small>
+              </td>
+              <td class="text-secondary">₹{{ item.mrp || 0 }}<br>
+                <small class="text-secondary">₹{{ item.purchase_rate || 0 }}</small>
+              </td>
+              <td class="text-secondary">{{ item.qty || 0 }}<br>
+                <small class="text-secondary">{{ item.mfg_date | date:'dd-MM-yy' }}</small>
+              </td>
+              <td class="text-secondary">₹{{ (item.qty || 0) * (item.purchase_rate || 0) }}</td>
+              <td>{{ item.qty || 0 }}<br>
+                <small class="text-secondary">₹{{ (item.qty || 0) * (item.purchase_rate || 0) }}</small>
+              </td>
+              <td>
+                <div class="actions">
+                  <button class="btn btn-sm bg-secondary text-white" (click)="openSerial(item)">
+                    <i class="fa-solid fa-eye"></i> Serial
+                  </button>
+                  <button class="btn btn-sm btn-primary text-white" (click)="onEdit(item)">
+                    Edit <i class="fa-solid fa-pen"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <tr *ngIf="paginatedList.length === 0">
+              <td colspan="11" style="text-align:center;color:#aaa;padding:24px">No records found</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- PrimeNG Paginator -->
+        <p-paginator [rows]="rowsPerPage" [totalRecords]="totalRecords" [rowsPerPageOptions]="[10, 25, 50, 100]"
+          (onPageChange)="onPageChange($event)" [showCurrentPageReport]="true"
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} records">
+        </p-paginator>
+      </div>
+    </div>
+
+    <div *ngIf="activeSection === 'form'" class="content">
+      <div class="card">
+        <div class="card-header" style="background: #4F46E5;">
+          <div class="card-header-left">
+            <button class="btn btn-sm btn-icon" (click)="showTab('table')" title="Back">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M10 3L4 8l6 5V3z" />
+              </svg>
+            </button>
+            <div class="card-title text-white">{{ mode === 'add' ? 'Add opening stock' : 'Edit opening stock' }}</div>
+          </div>
+        </div>
+
+        <form [formGroup]="componentListForm" (ngSubmit)="onSubmit()" style="padding-bottom:1rem">
+
+          <div class="form-section-label">Location &amp; purchase info</div>
+          <div class="form-grid-4">
+            <div class="form-group">
+              <label class="form-label fw-bold">Location <span class="text-danger"
+                  style="font-size: 16px;">*</span></label>
+              <p-autocomplete formControlName="location" [suggestions]="filteredLocation"
+                (completeMethod)="filterLocation($event)" placeholder="Enter Location">
+              </p-autocomplete>
+              <div class="text-danger"
+                *ngIf="componentListForm.get('location')?.touched && componentListForm.get('location')?.invalid">
+                required
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label fw-bold">Sub location<span class="text-danger"
+                  style="font-size: 16px;">*</span></label>
+              <p-autocomplete formControlName="sub_location" [suggestions]="filteredSubLocation"
+                (completeMethod)="filterSubLocation($event)" placeholder="Enter Sub Location">
+              </p-autocomplete>
+              <div class="text-danger"
+                *ngIf="componentListForm.get('sub_location')?.touched && componentListForm.get('sub_location')?.invalid">
+                required
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label fw-bold">Supplier<span class="text-danger"
+                  style="font-size: 16px;">*</span></label>
+              <p-autocomplete formControlName="supplier" [suggestions]="filteredSuppliers"
+                (completeMethod)="filterSupplier($event)" placeholder="Supplier">
+              </p-autocomplete>
+              <div class="text-danger"
+                *ngIf="componentListForm.get('supplier')?.touched && componentListForm.get('supplier')?.invalid">
+                required
+              </div>
+            </div>
+            <div class="form-group fw-bold">
+              <label class="form-label">Purchase date</label>
+              <p-datepicker formControlName="purchase_date" [showIcon]="true" [showOnFocus]="false" />
+            </div>
+          </div>
+
+          <hr />
+
+          <div class="form-section-label">Product details</div>
+          <div class="form-grid-4">
+            <div class="form-group">
+              <label class="form-label fw-bold">Reference no.<span class="text-danger"
+                  style="font-size: 16px;">*</span></label>
+              <input class="form-control" formControlName="purchase_ref_no" placeholder="Ref no" />
+              <div class="text-danger"
+                *ngIf="componentListForm.get('purchase_ref_no')?.touched && componentListForm.get('purchase_ref_no')?.invalid">
+                required
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label fw-bold">Product name<span class="text-danger"
+                  style="font-size: 16px;">*</span></label>
+              <p-autocomplete formControlName="product_name" [suggestions]="filteredProductNames"
+                (completeMethod)="filtereProductNames($event)" placeholder="Product name">
+              </p-autocomplete>
+              <div class="text-danger"
+                *ngIf="componentListForm.get('product_name')?.touched && componentListForm.get('product_name')?.invalid">
+                required
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label fw-bold">Part name<span class="text-danger"
+                  style="font-size: 16px;">*</span></label>
+              <p-autocomplete formControlName="part_name" [suggestions]="filteredPartNames"
+                (completeMethod)="filterePartNames($event)" placeholder="Part name">
+              </p-autocomplete>
+              <div class="text-danger"
+                *ngIf="componentListForm.get('part_name')?.touched && componentListForm.get('part_name')?.invalid">
+                required
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label fw-bold">Model no.<span class="text-danger"
+                  style="font-size: 16px;">*</span></label>
+              <p-autocomplete formControlName="model_no" [suggestions]="filteredModels"
+                (completeMethod)="filterModelNo($event)" placeholder="Model No">
+              </p-autocomplete>
+
+              <div class="text-danger"
+                *ngIf="componentListForm.get('model_no')?.touched && componentListForm.get('model_no')?.invalid">
+                required
+              </div>
+            </div>
+          </div>
+
+          <div class="form-grid-4" style="padding-top:0">
+            <div class="form-group">
+              <label class="form-label fw-bold">Product category<span class="text-danger"
+                  style="font-size: 16px;">*</span></label>
+              <p-autocomplete formControlName="product_category" [suggestions]="filteredCategories"
+                (completeMethod)="filterCategory($event)" placeholder="Category">
+              </p-autocomplete>
+              <div class="text-danger"
+                *ngIf="componentListForm.get('product_category')?.touched && componentListForm.get('product_category')?.invalid">
+                required
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label fw-bold">Product type<span class="text-danger"
+                  style="font-size: 16px;">*</span></label>
+              <p-autocomplete formControlName="product_type" [suggestions]="filteredTypes"
+                (completeMethod)="filterType($event)" placeholder="product type">
+              </p-autocomplete>
+              <div class="text-danger"
+                *ngIf="componentListForm.get('product_type')?.touched && componentListForm.get('product_type')?.invalid">
+                required
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label fw-bold">Product / spare</label>
+              <select class="form-control" formControlName="is_product_spare">
+                <option value="">Select…</option>
+                <option [value]="1">Product</option>
+                <option [value]="2">Spare</option>
+                <option [value]="3">New</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label fw-bold">Quantity</label>
+              <input class="form-control" formControlName="qty" type="number" placeholder="Qty" min="1" />
+            </div>
+            <div class="form-group">
+              <label class="form-label fw-bold">MFG date</label>
+              <p-datepicker formControlName="mfg_date" [showIcon]="true" [showOnFocus]="false" />
+            </div>
+            <div class="form-group">
+              <label class="form-label fw-bold">Company</label>
+              <p-autocomplete formControlName="company" [suggestions]="filteredCompanies"
+                (completeMethod)="filterCompany($event)" placeholder="Company">
+              </p-autocomplete>
+            </div>
+            <div class="form-group">
+              <label class="form-label fw-bold">Purchase Rate</label>
+              <input class="form-control" formControlName="purchase_rate" placeholder="Purchase Rate" />
+            </div>
+            <div class="form-group">
+              <label class="form-label fw-bold">MRP</label>
+              <input class="form-control" formControlName="mrp" placeholder="MRP" />
+            </div>
+          </div>
+
+          <hr class="section-divider" />
+
+          <div class="form-section-label">Images</div>
+          <div class="form-grid-2">
+            <div class="img-upload-card">
+              <div class="img-upload-header">Product image</div>
+              <div class="img-upload-preview" (click)="productFileInput.click()">
+                <img *ngIf="productPreview" [src]="productPreview"
+                  style="max-height:100%;max-width:100%;object-fit:contain" />
+                <div *ngIf="!productPreview" style="text-align:center">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="1.5"
+                    style="display:block;margin:0 auto">
+                    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12" />
+                  </svg>
+                  <div style="font-size:11px;margin-top:5px;color:#9ca3af">Click to upload</div>
+                </div>
+              </div>
+              <div class="img-upload-footer">
+                <button type="button" class="btn text-white btn-sm" style="width:100%;justify-content:center; background: #4F46E5;"
+                  (click)="productFileInput.click()">
+                  Upload product image
+                </button>
+                <button type="button" class="btn btn-sm" style="width:100%;justify-content:center;margin-top:4px"
+                  *ngIf="productPreview" (click)="productPreview = null">
+                  <i class="fa-solid fa-xmark"></i> Clear image
+                </button>
+                <input #productFileInput type="file" hidden accept="image/*"
+                  (change)="onFileSelect($event, 'product')" />
+              </div>
+            </div>
+
+            <div class="img-upload-card">
+              <div class="img-upload-header">Purchase image</div>
+              <div class="img-upload-preview" (click)="purchaseFileInput.click()">
+                <img *ngIf="purchasePreview" [src]="purchasePreview"
+                  style="max-height:100%;max-width:100%;object-fit:contain" />
+                <div *ngIf="!purchasePreview" style="text-align:center">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="1.5"
+                    style="display:block;margin:0 auto">
+                    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12" />
+                  </svg>
+                  <div style="font-size:11px;margin-top:5px;color:#9ca3af">Click to upload</div>
+                </div>
+              </div>
+              <div class="img-upload-footer">
+                <button type="button" class="btn text-white btn-sm" style="width:100%;justify-content:center; background: #4F46E5;"
+                  (click)="purchaseFileInput.click()">
+                  Upload purchase image
+                </button>
+                <button type="button" class="btn btn-sm" style="width:100%;justify-content:center;margin-top:4px"
+                  *ngIf="purchasePreview" (click)="purchasePreview = null">
+                  <i class="fa-solid fa-xmark"></i> Clear image
+                </button>
+                <input #purchaseFileInput type="file" hidden accept="image/*"
+                  (change)="onFileSelect($event, 'purchase')" />
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex;justify-content:flex-end;gap:8px;padding:12px 16px 0">
+            <button type="button" class="btn" (click)="showTab('table')">Cancel</button>
+            <button type="button" class="btn btn-primary" (click)="saveDetails()">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M2 2h9l3 3v9H2V2zm7 1v3h3l-3-3z" />
+              </svg>
+              {{ mode === 'add' ? 'Save entry' : 'Update entry' }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div *ngIf="activeSection === 'serial'" class="content">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-header-left">
+            <button class="btn btn-sm btn-icon" (click)="showTab('table')" title="Back">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M10 3L4 8l6 5V3z" />
+              </svg>
+            </button>
+            <div class="card-title">Serial numbers — {{ currentSerialItem?.product_name }}</div>
+          </div>
+          <span class="count-badge">{{ selectedRowData?.data?.length || 0 }} serials</span>
+        </div>
+
+        <div class="serial-layout">
+          <div class="serial-sidebar">
+            <div class="form-section-label" style="padding:0;margin-bottom:2px">Add serial entry</div>
+
+            <form [formGroup]="openingStockSaveForm">
+              <div class="form-group">
+                <label class="form-label">Serial no. 1</label>
+                <input class="form-control" formControlName="serial_no1" placeholder="Serial no 1" />
+              </div>
+              <div class="form-group" style="margin-top:8px">
+                <label class="form-label">Serial no. 2</label>
+                <input class="form-control" formControlName="serial_no2" placeholder="Serial no 2" />
+              </div>
+              <div class="form-group" style="margin-top:8px">
+                <label class="form-label">Quantity</label>
+                <input class="form-control" formControlName="qty" type="number" placeholder="Qty" min="1" />
+              </div>
+
+              <div class="img-upload-card" style="margin-top:8px">
+                <div class="img-upload-header">Serial image</div>
+                <div class="img-upload-preview" style="height:80px" (click)="serialFileInput.click()">
+                  <img *ngIf="serialPreview" [src]="serialPreview"
+                    style="max-height:100%;max-width:100%;object-fit:contain" />
+                  <div *ngIf="!serialPreview" style="font-size:11px;color:#9ca3af">Click to upload</div>
+                </div>
+                <div class="img-upload-footer">
+                  <button type="button" class="btn btn-sm" style="width:100%;justify-content:center"
+                    (click)="serialFileInput.click()"><i class="fa-solid fa-upload"></i> Upload</button>
+                  <button type="button" class="btn btn-sm" style="width:100%;justify-content:center;margin-top:4px"
+                    *ngIf="serialPreview" (click)="serialPreview = null">
+                    <i class="fa-solid fa-xmark"></i> Clear image
+                  </button>
+                  <input #serialFileInput type="file" hidden accept="image/*"
+                    (change)="onSerialPhotoSelected($event)" />
+                </div>
+              </div>
+
+              <button type="button" class="btn btn-primary" style="justify-content:center;margin-top:10px;width:100%"
+                (click)="derialnosSave()">
+                Save serial
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor">
+                  <path d="M2 2h9l3 3v9H2V2zm7 1v3h3l-3-3z" />
+                </svg>
+              </button>
+            </form>
+          </div>
+
+
+          <div>
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Serial no. 1</th>
+                  <th>Serial no. 2</th>
+                  <th>Qty</th>
+                  <th>Image</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let s of selectedRowData?.data; let i = index">
+                  <td style="color:#aaa">{{ (i + 1).toString().padStart(2, '0') }}</td>
+                  <td>{{ s.serial_no1 }}</td>
+                  <td>{{ s.serial_no2 }}</td>
+                  <td>{{ s.qty }}</td>
+                  <td>{{s.serial_imgBase64}}</td>
+                  <td>
+                    <span *ngIf="s.serial_imgBase64" class="tag-success">Uploaded</span>
+                    <span *ngIf="!s.serial_imgBase64" style="color:#aaa">—</span>
+                  </td>
+                  <td>
+                    <div class="actions">
+                      <button class="btn btn-sm btn-primary text-white" (click)="onEdits(s)">
+                        Edit <i class="fa-solid fa-pen"></i>
+                      </button>
+                    </div>
+                  <td>
+                </tr>
+                <tr *ngIf="!selectedRowData?.data || selectedRowData.data.length === 0">
+                  <td colspan="5" style="text-align:center;color:#aaaaaa;padding:24px">No Data Found....</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

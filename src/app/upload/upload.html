@@ -1,0 +1,170 @@
+<link rel="stylesheet" href="https://unpkg.com/primeflex@latest/primeflex.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="card border-cyan-300">
+                <div class="card-header bg-info">
+                    <h5 class="text-white"><i class="fa-brands fa-wpforms"></i> About Forms</h5>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="col-6">
+                            <div class="field">
+                                <label class="font-medium text-sm">Firstname:</label>
+                                <input type="text" placeholder="Enter FirstName"
+                                    class="text-base text-color surface-overlay p-2 py-1 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-cyan-300 w-full">
+                            </div>
+                            <div class="field">
+                                <label class="font-medium text-sm">Lastname:</label>
+                                <input type="text" placeholder="Enter LastName"
+                                    class="text-base text-color surface-overlay p-2 py-1 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-cyan-300 w-full">
+                            </div>
+                            <div class="field">
+                                <label class="font-medium text-sm">Email:</label>
+                                <input type="text" placeholder="Enter Email"
+                                    class="text-base text-color surface-overlay p-2 py-1 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-cyan-300 w-full">
+                            </div>
+                            <div class="field">
+                                <label class="font-medium text-sm">PhoneNo:</label>
+                                <input type="text" placeholder="Enter PhoneNo"
+                                    class="text-base text-color surface-overlay p-2 py-1 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-cyan-300 w-full">
+                            </div>
+                        </div>
+
+                        <div class="field text-end">
+                             <button type="button" class="bg-cyan-300 border-cyan-300 px-3 py-2 border-round cursor-pointer transition-all transition-duration-200 hover:bg-cyan-300 hover:border-cyan-300 active:bg-cyan-300 active:border-cyan-300">Submit</button>
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<table class="table table-sm table-dark col-2" style="font-size: 0.70rem;">
+  <thead>
+    <tr class="table-primary">
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+       <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>John</td>
+      <td>Doe</td>
+      <td>@social</td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+<br>
+<hr>
+
+<div class="card flex justify-center">
+            <div pFocusTrap class="w-full sm:w-80 flex flex-col gap-6">
+                <p-iconfield>
+                    <p-inputicon>
+                        <i class="pi pi-user"></i>
+                    </p-inputicon>
+                    <input type="text" pInputText id="input" [(ngModel)]="name" type="text" placeholder="Name" [fluid]="true" />
+                </p-iconfield>
+                <p-iconfield>
+                    <p-inputicon>
+                        <i class="pi pi-envelope"> </i>
+                    </p-inputicon>
+                    <input type="text" pInputText id="email" [(ngModel)]="email" type="email" placeholder="Email" [fluid]="true" />
+                </p-iconfield>
+                <div class="flex items-center gap-2">
+                    <p-checkbox id="accept" [(ngModel)]="accept" name="accept" value="Accept" />
+                    <label for="accept">I agree to the terms and conditions.</label>
+                </div>
+                <p-button type="submit" label="Submit" class="mt-2" styleClass="w-full" />
+            </div>
+        </div>
+
+        <table class="table table-sm table-secondary small col-2" style="font-size: 0.70rem;">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>FirstName</th>
+                    <th>LastName</th>
+                    <th>FullName</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="table-primary">
+                    <th scope="row">1</th>
+                    <td>Ajay</td>
+                    <td>Pandey</td>
+                    <td>@AjayPandey</td>
+                </tr>
+                <tr class="table-info">
+                    <th scope="row">2</th>
+                    <td>Rahul</td>
+                    <td>Dwivedi</td>
+                    <td>@RahulDwivedi</td>
+                </tr>
+                <tr class="table-success">
+                    <th scope="row">3</th>
+                    <td>Pavan</td>
+                    <td>Tiwari</td>
+                    <td>@PavanTiwari</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-sm table-info small">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>City</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Ajay</td>
+                    <td>ajay2908@gmail.com</td>
+                    <td>Satna</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Ankul</td>
+                    <td>ankul@gmail.com</td>
+                    <td>Ahemdabad</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Pavan</td>
+                    <td>pavan@gmail.com</td>
+                    <td>Rajisthan</td>
+                </tr>
+            </tbody>
+        </table>

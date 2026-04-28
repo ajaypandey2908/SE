@@ -1,0 +1,644 @@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+<div class="vh-100 d-flex justify-content-center align-items-center position-relative"
+    style="background-image: url('https://zerolite.in/assets/img/skills-img.jpg'); background-size: cover; background-position: center;">
+
+    <div class="position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(0, 0, 0, 0.5);"></div>
+
+    <!-- <p>
+        Welcome to Zerolite Solutions
+        We at Zerolite solutions believe in CIS- Commitment, Integrity & Satisfaction. We archive our all business
+        commitments of our customers with all the business ethics with maximus customer satisfaction.
+    </p> -->
+    <a routerLink="/" style="cursor: pointer;">
+        <img src="https://zerolite.in/assets/img/logo/zerolite-logo.png" class="position-absolute top-0 start-0 m-3"
+            style="width: 120px;">
+    </a>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 mx-auto">
+
+                <!-- <div class="bg-dark bg-opacity-50 p-4 rounded"> -->
+                <div class="card shadow-lg">
+
+                    <div class="card-header bg-secondary text-white d-flex align-items-center gap-2">
+                        <img src="https://zerolite.in/assets/img/logo/zerolite-logo.png" style="width: 60px;">
+                        <h3 class="mb-0">
+                            User Login <i class="fa-solid fa-user text-warning"></i>
+                        </h3>
+                    </div>
+
+                    <div class="card-body">
+
+                        <form [formGroup]="loginPageForm" (ngSubmit)="onLogin()">
+
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-secondary">
+                                    VIPL Code <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" class="form-control form-control-sm" formControlName="viplcode"
+                                    placeholder="Enter VIPL code" [ngClass]="{
+                                            'is-valid': loginPageForm.get('viplcode')?.valid && loginPageForm.get('viplcode')?.touched,
+                                            'is-invalid': loginPageForm.get('viplcode')?.invalid && loginPageForm.get('viplcode')?.touched
+                                        }">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-secondary">Username <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control form-control-sm" formControlName="username"
+                                    placeholder="Enter your name" [ngClass]="{
+                                            'is-valid': loginPageForm.get('username')?.valid && loginPageForm.get('username')?.touched,
+                                            'is-invalid': loginPageForm.get('username')?.invalid && loginPageForm.get('username')?.touched
+                                        }">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-secondary">
+                                    Password <span class="text-danger">*</span>
+                                </label>
+                                <input type="password" class="form-control form-control-sm" formControlName="password"
+                                    placeholder="Enter password" [ngClass]="{
+                                            'is-valid': loginPageForm.get('password')?.valid && loginPageForm.get('password')?.touched,
+                                            'is-invalid': loginPageForm.get('password')?.invalid && loginPageForm.get('password')?.touched
+                                        }">
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-secondary fw-bold px-4">
+                                    Login <i class="fa-solid fa-right-to-bracket text-warning"></i>
+                                </button>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<footer class="bg-secondary text-white pb-2 mt-auto">
+    <div class="container text-center text-md-start">
+
+            <div class="col-md-4">
+                <img class="mt-2" src="https://zerolite.in/assets/img/logo/zerolite-logo.png" style="width: 120px;">
+            </div>
+
+            <hr>
+
+            <div class="text-center small">
+            © 2026 Zerolite. All Rights Reserved.
+            </div>
+
+    </div>
+            
+</footer>
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Opening Stock Manager</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#1a1a2e;background:#f4f6fb;min-height:100vh;display:flex;align-items:stretch}
+  .app{display:flex;width:100%;min-height:100vh}
+
+  
+  .sidebar{width:220px;background:#1e1b4b;padding:1.25rem 1rem;display:flex;flex-direction:column;gap:1.5rem;flex-shrink:0}
+  .sidebar-logo{color:#a5b4fc;font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px;padding-bottom:1rem;border-bottom:0.5px solid rgba(255,255,255,0.1)}
+  .sidebar-logo svg{width:16px;height:16px;opacity:0.9}
+  .nav-section{display:flex;flex-direction:column;gap:4px}
+  .nav-label{font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:0.08em;text-transform:uppercase;padding:0 8px;margin-bottom:4px}
+  .nav-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;cursor:pointer;font-size:13px;color:rgba(255,255,255,0.6);transition:background 0.15s,color 0.15s;user-select:none}
+  .nav-item:hover{background:rgba(255,255,255,0.1);color:#fff}
+  .nav-item.active{background:rgba(165,180,252,0.2);color:#a5b4fc}
+  .nav-icon{width:14px;height:14px;flex-shrink:0}
+
+  
+  .main{flex:1;display:flex;flex-direction:column;background:#f4f6fb;overflow:hidden}
+  .topbar{padding:1rem 1.5rem;border-bottom:1px solid #e5e7f0;display:flex;align-items:center;justify-content:space-between;background:#fff}
+  .topbar-title{font-size:15px;font-weight:600;color:#1a1a2e}
+  .topbar-sub{font-size:12px;color:#6b7280;margin-top:2px}
+
+  
+  .btn{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:8px;font-size:13px;cursor:pointer;border:1px solid #d1d5db;background:#fff;color:#374151;transition:background 0.12s,border-color 0.12s;font-family:inherit}
+  .btn:hover{background:#f9fafb;border-color:#9ca3af}
+  .btn-primary{background:#4f46e5;color:#fff;border-color:#4f46e5}
+  .btn-primary:hover{background:#4338ca;border-color:#4338ca}
+  .btn-sm{padding:5px 10px;font-size:12px}
+  .btn-icon{width:28px;height:28px;padding:0;justify-content:center;border-radius:6px}
+
+ 
+  .content{padding:1.5rem;overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:1.25rem}
+  .hidden{display:none!important}
+
+
+  .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .stat-card{background:#fff;border-radius:10px;padding:1rem;border:1px solid #e5e7f0}
+  .stat-label{font-size:12px;color:#6b7280;margin-bottom:6px}
+  .stat-value{font-size:24px;font-weight:600;color:#1a1a2e}
+  .stat-badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:20px;margin-top:6px}
+  .badge-success{background:#d1fae5;color:#065f46}
+  .badge-info{background:#dbeafe;color:#1e40af}
+  .badge-warn{background:#fef3c7;color:#92400e}
+
+
+  .card{background:#fff;border:1px solid #e5e7f0;border-radius:12px;overflow:hidden}
+  .card-header{padding:.875rem 1.25rem;border-bottom:1px solid #e5e7f0;display:flex;align-items:center;justify-content:space-between;background:#fff}
+  .card-header-left{display:flex;align-items:center;gap:10px}
+  .card-title{font-size:14px;font-weight:600;color:#1a1a2e}
+
+ 
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  thead tr{background:#f9fafb}
+  th{padding:10px 14px;text-align:left;font-size:11px;font-weight:600;color:#6b7280;letter-spacing:0.04em;text-transform:uppercase;white-space:nowrap;border-bottom:1px solid #e5e7f0}
+  td{padding:10px 14px;border-bottom:1px solid #f3f4f6;color:#374151;vertical-align:middle}
+  tr:last-child td{border-bottom:none}
+  tbody tr:hover td{background:#f9fafb}
+
+
+  .pill{display:inline-flex;align-items:center;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:500;white-space:nowrap}
+  .pill-product{background:#ede9fe;color:#5b21b6}
+  .pill-spare{background:#fef3c7;color:#92400e}
+  .pill-new{background:#d1fae5;color:#065f46}
+
+  
+  .actions{display:flex;gap:6px}
+
+ 
+  .form-section-label{font-size:11px;font-weight:600;color:#6b7280;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:10px}
+  .form-grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .form-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .form-grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  .form-group{display:flex;flex-direction:column;gap:5px}
+  .form-label{font-size:12px;color:#6b7280;font-weight:500}
+  .form-control{padding:7px 10px;border-radius:8px;border:1px solid #d1d5db;background:#fff;color:#1a1a2e;font-size:13px;font-family:inherit;transition:border-color 0.15s,box-shadow 0.15s;width:100%}
+  .form-control:focus{outline:none;border-color:#6366f1;box-shadow:0 0 0 3px rgba(99,102,241,0.12)}
+  .section-divider{border:none;border-top:1px solid #e5e7f0;margin:16px 0}
+
+
+  .img-upload-card{border:1px solid #e5e7f0;border-radius:10px;overflow:hidden}
+  .img-upload-header{background:#f9fafb;padding:8px 12px;font-size:11px;font-weight:600;color:#6b7280;text-transform:uppercase;letter-spacing:0.05em}
+  .img-upload-preview{height:110px;background:#f3f4f6;display:flex;align-items:center;justify-content:center;border-top:1px solid #e5e7f0;border-bottom:1px solid #e5e7f0;cursor:pointer}
+  .img-upload-footer{padding:8px 12px;background:#fff}
+
+  
+  .serial-layout{display:grid;grid-template-columns:280px 1fr}
+  .serial-sidebar{padding:1.25rem;border-right:1px solid #e5e7f0;display:flex;flex-direction:column;gap:10px}
+  .serial-table-wrap{overflow:auto}
+
+ 
+  .count-badge{background:#f3f4f6;border:1px solid #e5e7f0;border-radius:20px;font-size:11px;padding:2px 10px;color:#6b7280}
+</style>
+</head>
+<body>
+
+<div class="app">
+ 
+  <div class="sidebar">
+    <div class="sidebar-logo">
+      <svg viewBox="0 0 16 16" fill="none">
+        <circle cx="8" cy="8" r="3" fill="#a5b4fc"/>
+        <circle cx="8" cy="8" r="7" stroke="#a5b4fc" stroke-width="1"/>
+      </svg>
+      Stock Manager
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-label">Inventory</div>
+      <div class="nav-item active" onclick="showTab('table');setNav(this)">
+        <svg class="nav-icon" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M2 3h12v2H2V3zm0 4h12v2H2V7zm0 4h8v2H2v-2z"/>
+        </svg>
+        Opening stock
+      </div>
+      <div class="nav-item" onclick="showTab('serial');setNav(this)">
+        <svg class="nav-icon" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M3 2h10a1 1 0 011 1v10a1 1 0 01-1 1H3a1 1 0 01-1-1V3a1 1 0 011-1zm1 2v8h8V4H4zm1 1h2v2H5V5zm4 0h2v2H9V5zm-4 4h2v2H5V9zm4 0h2v2H9V9z"/>
+        </svg>
+        Serial numbers
+      </div>
+      <div class="nav-item" onclick="showTab('table');setNav(this)">
+        <svg class="nav-icon" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M8 1L1 5v6l7 4 7-4V5L8 1zm0 2l5 2.8V10L8 12.8 3 10V5.8L8 3z"/>
+        </svg>
+        Stock exchange
+      </div>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-label">General</div>
+      <div class="nav-item" onclick="setNav(this)">
+        <svg class="nav-icon" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M8 1a3 3 0 100 6A3 3 0 008 1zM2 13c0-2.8 2.7-5 6-5s6 2.2 6 5H2z"/>
+        </svg>
+        Community
+      </div>
+      <div class="nav-item" onclick="setNav(this)">
+        <svg class="nav-icon" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M8 1a1 1 0 011 1v1.05A5 5 0 0113 8h1a1 1 0 010 2h-1a5 5 0 01-4 4.95V16a1 1 0 01-2 0v-1.05A5 5 0 013 10H2a1 1 0 010-2h1a5 5 0 014-4.95V2a1 1 0 011-1zm0 4a3 3 0 100 6A3 3 0 008 5z"/>
+        </svg>
+        Settings
+      </div>
+    </div>
+  </div>
+
+ 
+  <div class="main">
+    <div class="topbar">
+      <div>
+        <div class="topbar-title" id="page-title">Opening stock list</div>
+        <div class="topbar-sub" id="page-sub">Manage inventory, serial numbers and product details</div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button class="btn btn-sm" onclick="showTab('table')">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor"><path d="M1 2h14v3H1V2zm0 5h14v2H1V7zm0 4h14v3H1v-3z"/></svg>
+          List view
+        </button>
+        <button class="btn btn-primary btn-sm" onclick="showTab('form')">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1v6H2v2h6v6h2V9h6V7H10V1H8z"/></svg>
+          Add stock
+        </button>
+      </div>
+    </div>
+
+    
+    <div id="tab-table" class="content">
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-label">Total items</div>
+          <div class="stat-value">248</div>
+          <div class="stat-badge badge-success">+12 this week</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Products</div>
+          <div class="stat-value">134</div>
+          <div class="stat-badge badge-info">54 categories</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Spare parts</div>
+          <div class="stat-value">114</div>
+          <div class="stat-badge badge-warn">8 low stock</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Locations</div>
+          <div class="stat-value">6</div>
+          <div class="stat-badge badge-info">18 sub-locations</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-header-left">
+            <div class="card-title">Stock entries</div>
+            <span class="count-badge">5 records</span>
+          </div>
+          <div style="display:flex;gap:8px">
+            <input class="form-control" placeholder="Search by product, location…" style="width:210px;padding:5px 10px;font-size:12px"/>
+            <button class="btn btn-sm">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor"><path d="M1 3h14v2L9 10v5l-2-1V10L1 5V3z"/></svg>
+              Filter
+            </button>
+          </div>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Location</th>
+              <th>Sub location</th>
+              <th>Purchase date</th>
+              <th>Product name</th>
+              <th>Category</th>
+              <th>Type</th>
+              <th>Product / spare</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Warehouse A</td><td>Rack 01</td><td>12-01-2025</td><td>HP ProBook 450</td><td>Electronics</td><td>Laptop</td>
+              <td><span class="pill pill-product">Product</span></td>
+              <td>
+                <div class="actions">
+                  <button class="btn btn-sm btn-icon" title="Edit" onclick="showTab('form')">
+                    <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M11.5 1a1.5 1.5 0 012.12 2.12L4.5 12.25 1 14l1.75-3.5L11.5 1z"/></svg>
+                  </button>
+                  <button class="btn btn-sm btn-icon" title="View serials" onclick="showTab('serial')">
+                    <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M8 3C4 3 1 8 1 8s3 5 7 5 7-5 7-5-3-5-7-5zm0 8a3 3 0 110-6 3 3 0 010 6z"/></svg>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Warehouse B</td><td>Shelf 03</td><td>05-03-2025</td><td>Dell UPS 600VA</td><td>Power</td><td>UPS</td>
+              <td><span class="pill pill-spare">Spare</span></td>
+              <td><div class="actions">
+                <button class="btn btn-sm btn-icon" onclick="showTab('form')"><svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M11.5 1a1.5 1.5 0 012.12 2.12L4.5 12.25 1 14l1.75-3.5L11.5 1z"/></svg></button>
+                <button class="btn btn-sm btn-icon" onclick="showTab('serial')"><svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M8 3C4 3 1 8 1 8s3 5 7 5 7-5 7-5-3-5-7-5zm0 8a3 3 0 110-6 3 3 0 010 6z"/></svg></button>
+              </div></td>
+            </tr>
+            <tr>
+              <td>Store Room</td><td>Cabinet 2</td><td>20-04-2025</td><td>Cisco Switch 24P</td><td>Networking</td><td>Switch</td>
+              <td><span class="pill pill-product">Product</span></td>
+              <td><div class="actions">
+                <button class="btn btn-sm btn-icon" onclick="showTab('form')"><svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M11.5 1a1.5 1.5 0 012.12 2.12L4.5 12.25 1 14l1.75-3.5L11.5 1z"/></svg></button>
+                <button class="btn btn-sm btn-icon" onclick="showTab('serial')"><svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M8 3C4 3 1 8 1 8s3 5 7 5 7-5 7-5-3-5-7-5zm0 8a3 3 0 110-6 3 3 0 010 6z"/></svg></button>
+              </div></td>
+            </tr>
+            <tr>
+              <td>Warehouse A</td><td>Rack 05</td><td>11-02-2025</td><td>Canon Toner TG-58</td><td>Consumables</td><td>Toner</td>
+              <td><span class="pill pill-spare">Spare</span></td>
+              <td><div class="actions">
+                <button class="btn btn-sm btn-icon" onclick="showTab('form')"><svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M11.5 1a1.5 1.5 0 012.12 2.12L4.5 12.25 1 14l1.75-3.5L11.5 1z"/></svg></button>
+                <button class="btn btn-sm btn-icon" onclick="showTab('serial')"><svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M8 3C4 3 1 8 1 8s3 5 7 5 7-5 7-5-3-5-7-5zm0 8a3 3 0 110-6 3 3 0 010 6z"/></svg></button>
+              </div></td>
+            </tr>
+            <tr>
+              <td>IT Room</td><td>Bay 01</td><td>18-03-2025</td><td>Logitech MX Keys</td><td>Peripherals</td><td>Keyboard</td>
+              <td><span class="pill pill-new">New</span></td>
+              <td><div class="actions">
+                <button class="btn btn-sm btn-icon" onclick="showTab('form')"><svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M11.5 1a1.5 1.5 0 012.12 2.12L4.5 12.25 1 14l1.75-3.5L11.5 1z"/></svg></button>
+                <button class="btn btn-sm btn-icon" onclick="showTab('serial')"><svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M8 3C4 3 1 8 1 8s3 5 7 5 7-5 7-5-3-5-7-5zm0 8a3 3 0 110-6 3 3 0 010 6z"/></svg></button>
+              </div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    
+    <div id="tab-form" class="content hidden">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-header-left">
+            <button class="btn btn-sm btn-icon" onclick="showTab('table')" title="Back">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor"><path d="M10 3L4 8l6 5V3z"/></svg>
+            </button>
+            <div class="card-title">Add opening stock</div>
+          </div>
+          <button class="btn btn-primary btn-sm">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor"><path d="M2 2h9l3 3v9H2V2zm7 1v3h3l-3-3zm-1 5H5v1h3V8zm3 2H5v1h5v-1zm0 2H5v1h5v-1z"/></svg>
+            Save entry
+          </button>
+        </div>
+
+        <div style="padding:1.5rem;display:flex;flex-direction:column;gap:0">
+
+          <div class="form-section-label">Location &amp; purchase info</div>
+          <div class="form-grid-4">
+            <div class="form-group">
+              <label class="form-label">Location</label>
+              <input class="form-control" placeholder="Enter location"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Sub location</label>
+              <input class="form-control" placeholder="Sub location"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Supplier</label>
+              <input class="form-control" placeholder="Supplier name"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Purchase date</label>
+              <input type="date" class="form-control"/>
+            </div>
+          </div>
+
+          <hr class="section-divider"/>
+
+          <div class="form-section-label">Product details</div>
+          <div class="form-grid-4">
+            <div class="form-group">
+              <label class="form-label">Reference no.</label>
+              <input class="form-control" placeholder="Ref no"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Product name</label>
+              <input class="form-control" placeholder="Product name"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Part name</label>
+              <input class="form-control" placeholder="Part name"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Model no.</label>
+              <input class="form-control" placeholder="Model no"/>
+            </div>
+          </div>
+
+          <div class="form-grid-4" style="margin-top:12px">
+            <div class="form-group">
+              <label class="form-label">MFG date</label>
+              <input type="date" class="form-control"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Company</label>
+              <input class="form-control" placeholder="Company name"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Serial no. 1</label>
+              <input class="form-control" placeholder="Serial no 1"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Serial no. 2</label>
+              <input class="form-control" placeholder="Serial no 2"/>
+            </div>
+          </div>
+
+          <div class="form-grid-3" style="margin-top:12px">
+            <div class="form-group">
+              <label class="form-label">Product category</label>
+              <input class="form-control" placeholder="Category"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Product type</label>
+              <input class="form-control" placeholder="Type"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Product / spare</label>
+              <select class="form-control">
+                <option value="">Select…</option>
+                <option>Product</option>
+                <option>Spare</option>
+              </select>
+            </div>
+          </div>
+
+          <hr class="section-divider"/>
+
+          <div class="form-section-label">Images</div>
+          <div class="form-grid-2">
+            <div class="img-upload-card">
+              <div class="img-upload-header">Product image</div>
+              <div class="img-upload-preview" id="product-preview" onclick="document.getElementById('product-file').click()">
+                <div style="text-align:center">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="1.5" style="margin:0 auto;display:block"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+                  <div style="font-size:12px;margin-top:6px;color:#9ca3af">Click to upload</div>
+                </div>
+              </div>
+              <div class="img-upload-footer">
+                <button class="btn btn-sm" style="width:100%;justify-content:center" onclick="document.getElementById('product-file').click()">
+                  <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1v10M3 7l5-5 5 5"/></svg>
+                  Upload product image
+                </button>
+                <input type="file" id="product-file" hidden accept="image/*" onchange="previewImg(event,'product-preview')"/>
+              </div>
+            </div>
+
+            <div class="img-upload-card">
+              <div class="img-upload-header">Purchase image</div>
+              <div class="img-upload-preview" id="purchase-preview" onclick="document.getElementById('purchase-file').click()">
+                <div style="text-align:center">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="1.5" style="margin:0 auto;display:block"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+                  <div style="font-size:12px;margin-top:6px;color:#9ca3af">Click to upload</div>
+                </div>
+              </div>
+              <div class="img-upload-footer">
+                <button class="btn btn-sm" style="width:100%;justify-content:center" onclick="document.getElementById('purchase-file').click()">
+                  <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1v10M3 7l5-5 5 5"/></svg>
+                  Upload purchase image
+                </button>
+                <input type="file" id="purchase-file" hidden accept="image/*" onchange="previewImg(event,'purchase-preview')"/>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:1.5rem">
+            <button class="btn" onclick="showTab('table')">Cancel</button>
+            <button class="btn btn-primary">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor"><path d="M2 2h9l3 3v9H2V2zm7 1v3h3l-3-3z"/></svg>
+              Save entry
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <div id="tab-serial" class="content hidden">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-header-left">
+            <button class="btn btn-sm btn-icon" onclick="showTab('table')" title="Back">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor"><path d="M10 3L4 8l6 5V3z"/></svg>
+            </button>
+            <div class="card-title">Serial numbers — HP ProBook 450</div>
+          </div>
+          <span class="count-badge">3 serials</span>
+        </div>
+
+        <div class="serial-layout">
+          <div class="serial-sidebar">
+            <div class="form-section-label" style="margin-bottom:4px">Add serial entry</div>
+
+            <div class="form-group">
+              <label class="form-label">Serial no. 1</label>
+              <input class="form-control" placeholder="Serial no 1"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Serial no. 2</label>
+              <input class="form-control" placeholder="Serial no 2"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Quantity</label>
+              <input class="form-control" type="number" placeholder="Qty" min="1"/>
+            </div>
+
+            <div class="img-upload-card">
+              <div class="img-upload-header">Serial image</div>
+              <div class="img-upload-preview" style="height:80px" id="serial-preview" onclick="document.getElementById('serial-file').click()">
+                <div style="font-size:12px;color:#9ca3af">Click to upload</div>
+              </div>
+              <div class="img-upload-footer">
+                <button class="btn btn-sm" style="width:100%;justify-content:center;font-size:12px" onclick="document.getElementById('serial-file').click()">Upload</button>
+                <input type="file" id="serial-file" hidden accept="image/*" onchange="previewImg(event,'serial-preview')"/>
+              </div>
+            </div>
+
+            <button class="btn btn-primary" style="justify-content:center;margin-top:4px">
+              Save serial
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor"><path d="M2 2h9l3 3v9H2V2zm7 1v3h3l-3-3z"/></svg>
+            </button>
+          </div>
+
+          <div class="serial-table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Serial no. 1</th>
+                  <th>Serial no. 2</th>
+                  <th>Qty</th>
+                  <th>Image</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="color:#9ca3af">01</td>
+                  <td>SN-HP-001A</td><td>SN-HP-001B</td><td>1</td>
+                  <td><span class="pill pill-new">Uploaded</span></td>
+                </tr>
+                <tr>
+                  <td style="color:#9ca3af">02</td>
+                  <td>SN-HP-002A</td><td>SN-HP-002B</td><td>2</td>
+                  <td><span style="color:#9ca3af;font-size:13px">—</span></td>
+                </tr>
+                <tr>
+                  <td style="color:#9ca3af">03</td>
+                  <td>SN-HP-003A</td><td>SN-HP-003B</td><td>1</td>
+                  <td><span class="pill pill-new">Uploaded</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  function showTab(name) {
+    ['table','form','serial'].forEach(function(t) {
+      var el = document.getElementById('tab-' + t);
+      if (t === name) el.classList.remove('hidden');
+      else el.classList.add('hidden');
+    });
+    var titles = {
+      table: ['Opening stock list', 'Manage inventory, serial numbers and product details'],
+      form:  ['Add opening stock', 'Fill in the details below and save the entry'],
+      serial:['Serial numbers', 'Add and manage serial number entries for this product']
+    };
+    document.getElementById('page-title').textContent = titles[name][0];
+    document.getElementById('page-sub').textContent   = titles[name][1];
+  }
+
+  function setNav(el) {
+    document.querySelectorAll('.nav-item').forEach(function(n) { n.classList.remove('active'); });
+    el.classList.add('active');
+  }
+
+  function previewImg(event, previewId) {
+    var file = event.target.files[0];
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      var box = document.getElementById(previewId);
+      box.innerHTML = '<img src="' + e.target.result + '" style="width:100%;height:100%;object-fit:cover"/>';
+    };
+    reader.readAsDataURL(file);
+  }
+</script>
+
+</body>
+</html> -->

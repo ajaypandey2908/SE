@@ -1,0 +1,125 @@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+<div class="container">
+    <div class="card border-1 border-primary">
+        <div class="card-header bg-primary">
+            <h5 class="text-white"><i class="fa-solid fa-plus text-warning"></i> Add Patient</h5>
+        </div>
+        <div class="card-body">
+            <form>
+                <div class="row">
+                    <div class="col p-2">
+                        <div class="card flex justify-center text-center">
+                            <label class="small fw-bold bg-dark text-white">Hospital Tag Image <i
+                                    class="fa-solid fa-arrow-down"></i></label>
+                            <p-image src="https://www.mydoctor108.com/assets/images/default_other.jpeg" alt="Image"
+                                width="100%" height="150px" [preview]="true" />
+                            <div class="d-flex mt-1 gap-2">
+                                <button class="btn btn-secondary w-100 btn-sm"><i class="fa-solid fa-camera"></i>
+                                    Camera</button>
+                                <button class="btn btn-primary w-100 btn-sm"><i class="fa-solid fa-upload"></i>
+                                    Upload</button>
+                            </div>
+                        </div>
+                        <div class="card flex justify-center mt-2 text-center">
+                            <label class="small fw-bold bg-dark text-white">Patient Image <i
+                                    class="fa-solid fa-arrow-down"></i></label>
+                            <p-image src="https://www.mydoctor108.com/assets/images/default_other.jpeg" alt="Image"
+                                width="100%" height="150px" [preview]="true" />
+                            <div class="d-flex mt-1 gap-2">
+                                <button class="btn btn-secondary w-100 btn-sm"><i class="fa-solid fa-camera"></i>
+                                    Camera</button>
+                                <button class="btn btn-primary w-100 btn-sm"><i class="fa-solid fa-upload"></i>
+                                    Upload</button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col">
+                        <div class="form-group p-1">
+                            <label class="small fw-normal">Hospital:</label>
+                            <input type="text" class="form-control form-control-sm" placeholder="Select Hospital...">
+                        </div>
+                        <div class="form-group p-1">
+                            <label class="small fw-normal">Hospital IPD:</label>
+                            <input type="text" class="form-control form-control-sm" placeholder="Enter Hospital IPD...">
+                        </div>
+                        <div class="form-group p-1">
+                            <label class="small fw-normal"><span class="text-danger" style="font-size: 17px;">*</span>
+                                Gender:</label>
+                            <input type="text" class="form-control form-control-sm" placeholder="Select Gender...">
+                        </div>
+                        <div class="form-group p-1">
+                            <label class="small fw-normal">Address:</label>
+                            <input type="text" class="form-control form-control-sm" placeholder="Enter Address...">
+                        </div>
+                        <div class="form-group p-1">
+                            <label class="small fw-normal">Contact Person:</label>
+                            <input type="text" class="form-control form-control-sm"
+                                placeholder="Enter Contact Person...">
+                        </div>
+                        <div class="form-group p-1">
+                            <label class="small fw-normal">Doctor Involved:</label>
+                            <input type="text" class="form-control form-control-sm"
+                                placeholder="Enter Doctor Involved...">
+                        </div>
+                        <div class="form-group p-1">
+                            <label class="small fw-normal">Operation Name:</label>
+                            <input type="text" class="form-control form-control-sm"
+                                placeholder="Enter Operation Name...">
+                        </div>
+
+                    </div>
+                    <div class="col">
+                        <div class="form-group p-1">
+                            <label class="small fw-normal">Hospital UHID:</label>
+                            <input type="text" class="form-control form-control-sm"
+                                placeholder="Enter Hospital UHID...">
+                        </div>
+                        <div class="form-group p-1">
+                            <label class="small fw-normal"><span class="text-danger" style="font-size: 17px;">*</span>
+                                Patient Name:</label>
+                            <input type="text" class="form-control form-control-sm" placeholder="Enter Patient Name...">
+                        </div>
+                        <div class="form-group p-1">
+                            <label class="small fw-normal">Date Of Birth:</label>
+                            <div class="d-flex w-100">
+                                <p-datepicker [showIcon]="true" inputId="buttondisplay" [showOnFocus]="false" />
+                            </div>
+                        </div>
+                        <div class="form-group p-1">
+                            <label class="small fw-normal"><span class="text-danger" style="font-size: 17px;">*</span>
+                                Patient Contact No:</label>
+                            <input type="text" class="form-control form-control-sm" placeholder="Enter Contact No...">
+                        </div>
+                        <div class="form-group p-1">
+                            <label class="small fw-normal"><span class="text-danger" style="font-size: 17px;">*</span>
+                                Patient Relation:</label>
+                            <input type="text" class="form-control form-control-sm"
+                                placeholder="Enter Patient Relation...">
+                        </div>
+                        <div class="form-group p-1">
+                            <label class="small fw-normal">Insurance Details:</label>
+                            <input type="text" class="form-control form-control-sm"
+                                placeholder="Enter Insurance Details...">
+                        </div>
+                        <div class="form-group p-1">
+                            <label class="small fw-normal">Provisional Diagnosis:</label>
+                            <input type="text" class="form-control form-control-sm"
+                                placeholder="Enter Provisional Diagnosis...">
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="form-group text-end d-flex justify-content-end gap-2 p-3">
+                    <button class="btn btn-success btn-sm"><i class="fa-solid fa-floppy-disk"></i> Save</button>
+                    <button class="btn btn-warning btn-sm"><i class="fa-solid fa-eraser"></i> Clear</button>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

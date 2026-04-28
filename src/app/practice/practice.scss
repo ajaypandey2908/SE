@@ -1,0 +1,15 @@
+*{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+:host ::ng-deep .p-datepicker {
+    width: 100%;
+}
+
+:host ::ng-deep .p-datepicker input {
+    height: 30px;
+}
+
+:host ::ng-deep input::placeholder {
+    color: #bbb;     
+    opacity: 0.8;
+} 

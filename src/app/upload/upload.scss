@@ -1,0 +1,9 @@
+input::placeholder {
+    color: #c2bfbf; 
+    opacity: 1; 
+    font-size: 0.9em;
+}
+
+input::-ms-input-placeholder {
+    color: #a59999;
+}
