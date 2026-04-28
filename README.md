@@ -1,3 +1,7 @@
+CREDENTIALS U SHOULD HAVE TO USE FOR LOGIN 
+1.9802
+2.9800000002
+3.4321
 # Zeroliteupdated
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.6.
