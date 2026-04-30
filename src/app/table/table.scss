@@ -1,0 +1,78 @@
+/* Container */
+#search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Main Button */
+.DocSearch-Button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 260px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  background-color: #f9fafb;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: sans-serif;
+}
+
+/* Hover Effect */
+.DocSearch-Button:hover {
+  background-color: #ffffff;
+  border-color: #c7d2fe;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+/* Left Side (Icon + Text) */
+.DocSearch-Button-Container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Search Icon */
+.DocSearch-Search-Icon {
+  color: #6b7280;
+}
+
+/* Placeholder Text */
+.DocSearch-Button-Placeholder {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* Right Side (Keys) */
+.DocSearch-Button-Keys {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Key Styling */
+.DocSearch-Button-Key {
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: #e5e7eb;
+  color: #374151;
+  border: 1px solid #d1d5db;
+  font-family: monospace;
+}
+
+/* SVG inside key */
+.DocSearch-Control-Key-Icon {
+  width: 12px;
+  height: 12px;
+}
+
+.search-input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  width: 100%;
+}

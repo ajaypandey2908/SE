@@ -635,7 +635,6 @@ export class Dashboard implements OnInit {
       next: (res: any) => {
         if (res.issuccess) {
           const d = res.data;
-
           const BASE_URL = 'https://api2023.zerolite.in/';
           const serialSrc = d.serial_img
             ? `${BASE_URL}${d.serial_img}`
