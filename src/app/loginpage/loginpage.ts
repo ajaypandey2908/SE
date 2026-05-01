@@ -3,20 +3,24 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
 import { Router } from '@angular/router';
 import { HttpApiService } from '../http-api.service';
 import { CommonModule } from '@angular/common';
+import { ToastModule } from 'primeng/toast';
+import { MessageModule } from 'primeng/message';
+import { MessageService } from 'primeng/api';
 
 
 @Component({
   selector: 'app-loginpage',
   standalone:true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule,ToastModule,MessageModule],
   templateUrl: './loginpage.html',
   styleUrl: './loginpage.scss',
+  providers: [MessageService],
 })
 export class Loginpage {
   loginPageForm!: FormGroup;
   obj_loginpage: any
 
-  constructor(private fb: FormBuilder, private router: Router, private httpApiService: HttpApiService) {
+  constructor(private fb: FormBuilder, private router: Router, private httpApiService: HttpApiService,private messageService: MessageService) {
     this.loginPageFormController();
   }
 
@@ -32,6 +36,18 @@ export class Loginpage {
   }
 
   ngOnInit() {
+      const state = history.state;
+
+  if (state?.showLogoutToast) {
+    setTimeout(() => {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Logged Out',
+        detail: 'You have been logged out successfully',
+        life: 2000
+      });
+    }, 100);
+  }
   }
 
   onLogin() {

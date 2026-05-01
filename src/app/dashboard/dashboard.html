@@ -57,18 +57,14 @@
           activeSection === 'form' ? (mode === 'add' ? 'Add opening stock' : 'Edit opening stock') :
           activeSection === 'serial' ? 'Serial numbers' : 'Opening stock list' }}
         </div>
-        <!-- <div class="topbar-sub">Manage inventory, serial numbers and product details</div> -->
       </div>
       <div style="display:flex;gap:8px;align-items:center">
-        <button class="btn btn-sm" (click)="showTab('table')">
-          <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor">
-            <path d="M1 2h14v3H1V2zm0 5h14v2H1V7zm0 4h14v3H1v-3z" />
-          </svg>
-          List view
-        </button>
         <button class="btn btn-primary btn-sm" (click)="openAdd()">
           <i class="fa-solid fa-plus"></i>
           Add stock
+        </button>
+        <button class="btn btn-sm p-1 bg-secondary text-white" (click)="logOut()">
+         LogOut <i class="fa-solid fa-arrow-right-from-bracket"></i>
         </button>
       </div>
     </div>
@@ -114,13 +110,6 @@
       </div>
 
       <div class="card">
-        <!-- <div class="card-header">
-          <div class="card-header-left">
-            <div class="card-title">Inventory Overview</div>
-            <span class="count-badge">{{ totalRecords }} records</span>
-          </div>
-        </div> -->
-
         <table>
           <thead>
             <tr style="background-color: #4F46E5;">
@@ -371,8 +360,8 @@
                 </div>
               </div>
               <div class="img-upload-footer">
-                <button type="button" class="btn text-white btn-sm" style="width:100%;justify-content:center; background: #4F46E5;"
-                  (click)="productFileInput.click()">
+                <button type="button" class="btn text-white btn-sm"
+                  style="width:100%;justify-content:center; background: #4F46E5;" (click)="productFileInput.click()">
                   Upload product image
                 </button>
                 <button type="button" class="btn btn-sm" style="width:100%;justify-content:center;margin-top:4px"
@@ -398,8 +387,8 @@
                 </div>
               </div>
               <div class="img-upload-footer">
-                <button type="button" class="btn text-white btn-sm" style="width:100%;justify-content:center; background: #4F46E5;"
-                  (click)="purchaseFileInput.click()">
+                <button type="button" class="btn text-white btn-sm"
+                  style="width:100%;justify-content:center; background: #4F46E5;" (click)="purchaseFileInput.click()">
                   Upload purchase image
                 </button>
                 <button type="button" class="btn btn-sm" style="width:100%;justify-content:center;margin-top:4px"

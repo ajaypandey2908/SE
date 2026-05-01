@@ -16,6 +16,7 @@ import { ToastModule } from 'primeng/toast';
 import { ButtonModule } from 'primeng/button';
 import { MessageService } from 'primeng/api';
 import { PaginatorModule } from 'primeng/paginator';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -97,7 +98,8 @@ export class Dashboard implements OnInit {
     private httpApiService: HttpApiService,
     private fb: FormBuilder,
     private cd: ChangeDetectorRef,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private router: Router
   ) { }
   get productCount(): number {
     return this.obj_componentList.filter((i) => i.is_product_spare === 'Product').length;
@@ -112,6 +114,18 @@ export class Dashboard implements OnInit {
   }
 
   ngOnInit() {
+    const navigation = history.state;
+
+    if (navigation?.showLogoutToast) {
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Logged Out',
+        detail: 'You have been logged out successfully',
+        life: 2000
+      });
+    }
+
+    this.activeSection = 'table';
     this.componentListForm = this.fb.group({
       srno: [0],
       location: ['', Validators.required],
@@ -249,6 +263,7 @@ export class Dashboard implements OnInit {
           this.obj_componentList = [];
         }
         this.filterList();
+        this.cd.detectChanges();
       },
       error: () => {
         this.obj_componentList = [];
@@ -675,4 +690,15 @@ export class Dashboard implements OnInit {
     this.filterLocationQuery = '';
     this.filterList();
   }
+
+  logOut() {
+  console.log('Logout clicked');
+  localStorage.clear();
+
+  this.router.navigate(['/login'], {
+    state: {
+      showLogoutToast: true
+    }
+  });
+}
 }
