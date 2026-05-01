@@ -22,7 +22,7 @@ import { PaginatorModule } from 'primeng/paginator';
   selector: 'app-dashboard',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [DatePickerModule, FormsModule, CommonModule, ReactiveFormsModule, 
+  imports: [DatePickerModule, FormsModule, CommonModule, ReactiveFormsModule,
     AutoCompleteModule, MessageModule, ToastModule, ButtonModule, PaginatorModule],
   templateUrl: `./dashboard.html`,
   styleUrl: './dashboard.scss',
@@ -30,7 +30,7 @@ import { PaginatorModule } from 'primeng/paginator';
 })
 export class Dashboard implements OnInit {
 
-  messageService = inject(MessageService);
+  // messageService = inject(MessageService);
   items: any[] | undefined;
   formSubmitted: boolean = false;
   // searchQuery = '';
@@ -97,6 +97,7 @@ export class Dashboard implements OnInit {
     private httpApiService: HttpApiService,
     private fb: FormBuilder,
     private cd: ChangeDetectorRef,
+    private messageService: MessageService
   ) { }
   get productCount(): number {
     return this.obj_componentList.filter((i) => i.is_product_spare === 'Product').length;
@@ -461,6 +462,12 @@ export class Dashboard implements OnInit {
   saveDetails() {
     if (this.componentListForm.invalid) {
       this.componentListForm.markAllAsTouched();
+
+      this.messageService.add({
+        severity: 'warn',
+        summary: 'Warning',
+        detail: 'Please fill all required fields ⚠️'
+      });
       return;
     }
 
@@ -492,6 +499,12 @@ export class Dashboard implements OnInit {
         this.activeSection = 'table';
       },
       error: (err) => console.error('Save error:', err),
+    });
+
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: 'Stock saved successfully ✅'
     });
 
   }
