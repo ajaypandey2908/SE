@@ -51,7 +51,16 @@ export class Loginpage {
   }
 
   onLogin() {
+    if (this.loginPageForm.invalid) {
+      this.loginPageForm.markAllAsTouched();
 
+      this.messageService.add({
+        severity: 'warn',
+        summary: 'Warning',
+        detail: 'Please fill all required fields ⚠️'
+      });
+      return;
+    }
     const payload = this.loginPageForm.value
     this.httpApiService.Login_Page(payload)
       .subscribe({

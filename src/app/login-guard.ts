@@ -14,7 +14,7 @@ export class LoginGuard implements CanActivate {
 
   canActivate(): boolean {
     if (this.appService.userDetails() !== null) {
-      this.router.navigate(['/dashboard'], { replaceUrl: true });
+      this.router.navigate(['/login'], { replaceUrl: true });
       return false;
     }
     return true;
