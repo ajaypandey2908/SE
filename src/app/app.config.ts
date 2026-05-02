@@ -26,6 +26,5 @@ export const appConfig: ApplicationConfig = {
       multi: true
     },
     provideHttpClient(),
-    // provideAnimations()
   ]
 };

@@ -12,7 +12,7 @@ export class HttpApiService {
 
   Login_Page(data: any) {
     return this.http.post(`${this.baseUrl}/login`, data);
-  }
+  } 
 
   dashboard_List(data: any, dt: any, subloc: any, model_no: any, pc: any, pt: any, sp: any) {
     return this.http.post(
